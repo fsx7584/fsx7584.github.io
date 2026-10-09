@@ -178,6 +178,8 @@
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 0 15px var(--accent-glow);
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-outline {
@@ -194,19 +196,35 @@
             display: inline-block;
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+        /* شبكة أزرار حسابات التواصل الاجتماعي */
+        .social-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             width: 100%;
-            margin-top: 20px;
+            max-width: 450px;
+            margin-top: 10px;
         }
 
-        .gallery-item {
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
             border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 14px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            box-shadow: 0 0 10px var(--accent-glow);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
         }
 
         .contact-form {
@@ -263,7 +281,7 @@
 
     <div class="page-container">
 
-        <!-- الصفحة الأولى: الترحب بالفيديو -->
+        <!-- الصفحة الأولى: الترحيب بالفيديو -->
         <div class="page active" id="page1">
             <div class="avatar-container">
                 <div class="speech-bubble" id="speechBubble">مرحباً بك في موقع FSX7584! 👋</div>
@@ -281,21 +299,33 @@
             </div>
         </div>
 
-        <!-- الصفحة الثانية: من أنا والمعرض -->
+        <!-- الصفحة الثانية: حساباتي التواصل الاجتماعي -->
         <div class="page" id="page2">
-            <h2 class="section-title" data-ar="من أنا" data-en="About Me">من أنا</h2>
-            <p data-ar="أهلاً بكم! أنا صاحب موقع FSX7584. أهدف لتقديم أفكاري ومشاريعي بأسلوب فخم واحترافي." data-en="Welcome! I am the creator of FSX7584. I aim to present my ideas and projects professionally.">أهلاً بكم! أنا صاحب موقع FSX7584. أهدف لتقديم أفكاري ومشاريعي بأسلوب فخم واحترافي.</p>
+            <h2 class="section-title" data-ar="حساباتي" data-en="My Socials">حساباتي</h2>
+            <p data-ar="يمكنك متابعتي والتواصل معي عبر المنصات التالية:" data-en="Follow and connect with me on these platforms:">يمكنك متابعتي والتواصل معي عبر المنصات التالية:</p>
 
-            <h2 class="section-title" style="margin-top: 20px;" data-ar="معرض الأعمال" data-en="Gallery">معرض الأعمال</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <h3 data-ar="مشروع 1" data-en="Project 1">مشروع 1</h3>
-                    <p data-ar="وصف التصميم الأول." data-en="Description of design 1.">وصف التصميم الأول.</p>
-                </div>
-                <div class="gallery-item">
-                    <h3 data-ar="مشروع 2" data-en="Project 2">مشروع 2</h3>
-                    <p data-ar="وصف التصميم الثاني." data-en="Description of design 2.">وصف التصميم الثاني.</p>
-                </div>
+            <div class="social-grid">
+                <!-- يمكنك تغيير علامة # برابط حسابك المباشر مستقبلاً -->
+                <a href="#" target="_blank" class="social-link">
+                    <span>TikTok</span>
+                    <span>🎵</span>
+                </a>
+                <a href="#" target="_blank" class="social-link">
+                    <span>Instagram</span>
+                    <span>📸</span>
+                </a>
+                <a href="#" target="_blank" class="social-link">
+                    <span>YouTube</span>
+                    <span>▶️</span>
+                </a>
+                <a href="#" target="_blank" class="social-link">
+                    <span>X (Twitter)</span>
+                    <span>🐦</span>
+                </a>
+                <a href="#" target="_blank" class="social-link">
+                    <span>Discord</span>
+                    <span>💬</span>
+                </a>
             </div>
 
             <div class="nav-buttons">
@@ -304,7 +334,7 @@
             </div>
         </div>
 
-        <!-- الصفحة الثالثة: التواصل -->
+        <!-- الصفحة الثالثة: التواصل المباشر -->
         <div class="page" id="page3">
             <h2 class="section-title" data-ar="تواصل معي" data-en="Contact Me">تواصل معي</h2>
             <form class="contact-form" onsubmit="event.preventDefault(); alert(currentLang==='ar'?'شكراً لتواصلك!':'Thank you!');">
