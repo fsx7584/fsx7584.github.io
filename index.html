@@ -208,8 +208,7 @@
         .social-link {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            gap: 15px;
+            justify-content: space-between;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-color);
@@ -225,6 +224,12 @@
         .social-link:hover {
             transform: translateY(-3px);
             border-color: var(--primary-color);
+        }
+
+        .social-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .social-avatar {
@@ -314,8 +319,11 @@
 
             <div class="social-grid">
                 <a href="https://www.tiktok.com/@fsx7584?_r=1&_t=ZS-9APsgWAyUQ3" target="_blank" class="social-link">
-                    <img src="./avatar.jpg" alt="FSX7584" class="social-avatar">
-                    <span>FSX7584</span>
+                    <span>TikTok</span>
+                    <div class="social-left">
+                        <span>FSX7584</span>
+                        <img src="./DF2D89CD-74E7-4FD5-8D44-28878CD51A47.png" alt="FSX7584" class="social-avatar">
+                    </div>
                 </a>
             </div>
 
