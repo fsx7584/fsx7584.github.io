@@ -121,16 +121,16 @@
             cursor: pointer;
         }
 
-        .avatar-img {
-            width: 200px;
+        .avatar-video {
+            width: 220px;
             height: auto;
             border-radius: 20px;
             filter: drop-shadow(0 0 20px var(--accent-glow));
-            animation: floatPerson 4s ease-in-out infinite;
             transition: transform 0.3s ease;
+            object-fit: cover;
         }
 
-        .avatar-img:hover {
+        .avatar-video:hover {
             transform: scale(1.05);
         }
 
@@ -152,11 +152,6 @@
             50% { transform: rotate(10deg); }
             60% { transform: rotate(0deg); }
             100% { transform: rotate(0deg); }
-        }
-
-        @keyframes floatPerson {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
         @keyframes float {
@@ -276,7 +271,10 @@
         <div class="avatar-container">
             <div class="speech-bubble" id="speechBubble">مرحباً بك في موقع FSX7584! 👋</div>
             <div class="avatar-box" onclick="greetUser()">
-                <img src="49D38F58-2A77-41A6-90A7-FB1AE86DC8A7.png" alt="FSX7584 Avatar" class="avatar-img">
+                <video class="avatar-video" autoplay loop muted playsinline>
+                    <source src="video-output-AC78C5D7-E112-4DE8-B05A-231474A771C5-2.mp4" type="video/mp4">
+                    متصفحك لا يدعم تشغيل الفيديو.
+                </video>
                 <span class="waving-hand">👋</span>
             </div>
         </div>
