@@ -77,6 +77,92 @@
         .hero {
             text-align: center;
             align-items: center;
+            position: relative;
+        }
+
+        /* حاوية الشخصية الخاصة بك */
+        .avatar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .speech-bubble {
+            background: var(--card-bg);
+            border: 1px solid var(--primary-color);
+            color: var(--text-color);
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: var(--primary-color) transparent;
+            display: block;
+            width: 0;
+        }
+
+        .avatar-box {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .avatar-img {
+            width: 180px;
+            height: auto;
+            border-radius: 20px;
+            filter: drop-shadow(0 0 20px var(--accent-glow));
+            animation: floatPerson 4s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .avatar-img:hover {
+            transform: scale(1.05);
+        }
+
+        .waving-hand {
+            position: absolute;
+            top: 10px;
+            left: -10px;
+            font-size: 2.5rem;
+            animation: wave 1.5s infinite;
+            transform-origin: 70% 70%;
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes floatPerson {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
         .hero h1 {
@@ -188,6 +274,15 @@
     </header>
 
     <section class="hero">
+        <!-- قسم الشخصية المخصص -->
+        <div class="avatar-container">
+            <div class="speech-bubble" id="speechBubble">مرحباً بك في موقع FSX7584! 👋</div>
+            <div class="avatar-box" onclick="greetUser()">
+                <img src="avatar.png" alt="FSX7584 Avatar" class="avatar-img">
+                <span class="waving-hand">👋</span>
+            </div>
+        </div>
+
         <h1>مرحباً بكم في FSX7584</h1>
         <p>موقعي الشخصي لاستعراض المشاريع والتصاميم والخبرات بكل احترافية.</p>
         <a href="#contact" class="btn">تواصل معي</a>
@@ -240,6 +335,22 @@
     <footer>
         <p>&copy; 2026 FSX7584. جميع الحقوق محفوظة.</p>
     </footer>
+
+    <script>
+        const messages = [
+            "أهلاً بك زائرنا العزيز! ✨",
+            "تسعدنا زيارتك لموقع FSX7584! 🚀",
+            "استمتع بتصفح الأعمال والمشاريع! 🎨",
+            "لا تتردد في التواصل معنا عبر النموذج بالأسفل! ✉️"
+        ];
+        
+        let msgIndex = 0;
+
+        function greetUser() {
+            msgIndex = (msgIndex + 1) % messages.length;
+            document.getElementById('speechBubble').innerText = messages[msgIndex];
+        }
+    </script>
 
 </body>
 </html>
