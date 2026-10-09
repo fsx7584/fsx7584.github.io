@@ -208,15 +208,16 @@
         .social-link {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
+            gap: 15px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-color);
-            padding: 14px 20px;
+            padding: 12px 20px;
             border-radius: 12px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             box-shadow: 0 0 10px var(--accent-glow);
             transition: transform 0.2s, border-color 0.2s;
         }
@@ -224,6 +225,14 @@
         .social-link:hover {
             transform: translateY(-3px);
             border-color: var(--primary-color);
+        }
+
+        .social-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--primary-color);
         }
 
         .contact-form {
@@ -298,15 +307,15 @@
             </div>
         </div>
 
-        <!-- الصفحة الثانية: حسابي (TikTok) -->
+        <!-- الصفحة الثانية: حسابي (TikTok مع الصورة والاسم) -->
         <div class="page" id="page2">
             <h2 class="section-title" data-ar="حسابي" data-en="My Account">حسابي</h2>
             <p data-ar="يمكنك متابعتي والتواصل معي عبر حسابي الرسمي:" data-en="You can follow and connect with me via my official account:">يمكنك متابعتي والتواصل معي عبر حسابي الرسمي:</p>
 
             <div class="social-grid">
                 <a href="https://www.tiktok.com/@fsx7584?_r=1&_t=ZS-9APsgWAyUQ3" target="_blank" class="social-link">
-                    <span>TikTok (@fsx7584)</span>
-                    <span>🎵</span>
+                    <img src="./avatar.jpg" alt="FSX7584" class="social-avatar">
+                    <span>FSX7584</span>
                 </a>
             </div>
 
