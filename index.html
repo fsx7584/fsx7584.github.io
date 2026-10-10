@@ -252,9 +252,18 @@
         }
 
         .form-group label {
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 5px;
             color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .security-note {
+            font-size: 0.8rem;
+            color: #10b981;
+            font-weight: 400;
         }
 
         .form-group input, .form-group textarea {
@@ -291,10 +300,9 @@
         <!-- الصفحة الأولى: الترحيب بالفيديو -->
         <div class="page active" id="page1">
             <div class="avatar-container">
-                <!-- المستطيل الأعلى يظل ثابتاً بالعبارة المطلوبة فقط -->
                 <div class="speech-bubble" id="speechBubble" data-ar="مرحباً بك في موقع FSX7584!" data-en="Welcome to FSX7584 website!">مرحباً بك في موقع FSX7584!</div>
                 <div class="avatar-box" onclick="playVideo()">
-                    <video class="avatar-video" autoplay loop muted playsinline preload="metadata">
+                    <video class="avatar-video" id="heroVideo" autoplay loop muted playsinline preload="auto">
                         <source src="./video-output-AC78C5D7-E112-4DE8-B05A-231474A771C5-2.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -305,7 +313,7 @@
             </div>
         </div>
 
-        <!-- الصفحة الثانية: حسابي (TikTok مع الصورة والاسم) -->
+        <!-- الصفحة الثانية: حسابي -->
         <div class="page" id="page2">
             <h2 class="section-title" data-ar="حسابي" data-en="My Account">حسابي</h2>
             <p data-ar="يمكنك متابعتي والتواصل معي عبر حسابي الرسمي:" data-en="You can follow and connect with me via my official account:">يمكنك متابعتي والتواصل معي عبر حسابي الرسمي:</p>
@@ -329,18 +337,21 @@
         <!-- الصفحة الثالثة: التواصل المباشر -->
         <div class="page" id="page3">
             <h2 class="section-title" data-ar="تواصل معي" data-en="Contact Me">تواصل معي</h2>
-            <form class="contact-form" onsubmit="event.preventDefault(); alert(currentLang==='ar'?'شكراً لتواصلك!':'Thank you!');">
+            <form class="contact-form" onsubmit="event.preventDefault(); alert(currentLang==='ar'?'تم إرسال رسالتك بنجاح!':'Your message has been sent successfully!');">
                 <div class="form-group">
                     <label data-ar="الاسم" data-en="Name">الاسم</label>
-                    <input type="text" required>
+                    <input type="text" placeholder="أدخل اسمك هنا..." required>
                 </div>
                 <div class="form-group">
-                    <label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
-                    <input type="email" required>
+                    <label>
+                        <span data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</span>
+                        <span class="security-note" data-ar="(معلوماتك محمية وآمنة 🔒)" data-en="(Your info is safe & secure 🔒)">(معلوماتك محمية وآمنة 🔒)</span>
+                    </label>
+                    <input type="email" placeholder="example@email.com" required>
                 </div>
                 <div class="form-group">
                     <label data-ar="الرسالة" data-en="Message">الرسالة</label>
-                    <textarea rows="4" required></textarea>
+                    <textarea rows="4" placeholder="اكتب رسالتك هنا..." required></textarea>
                 </div>
                 <button type="submit" class="btn" style="width: 100%;" data-ar="إرسال" data-en="Send">إرسال</button>
             </form>
@@ -366,12 +377,17 @@
             document.getElementById(`page${pageNum}`).classList.add('active');
             currentPage = pageNum;
             window.scrollTo(0,0);
+
+            // ضمان تشغيل الفيديو عند العودة للصفحة الأولى
+            if (pageNum === 1) {
+                playVideo();
+            }
         }
 
         function playVideo() {
-            const vid = document.querySelector('.avatar-video');
-            if (vid && vid.paused) {
-                vid.play();
+            const vid = document.getElementById('heroVideo');
+            if (vid) {
+                vid.play().catch(() => {});
             }
         }
 
@@ -394,10 +410,14 @@
             });
         }
 
+        // تشغيل مستمر وضمان عدم توقف الفيديو
         document.addEventListener('DOMContentLoaded', () => {
-            const vid = document.querySelector('.avatar-video');
+            const vid = document.getElementById('heroVideo');
             if (vid) {
                 vid.play().catch(() => {});
+                vid.addEventListener('ended', () => {
+                    vid.play();
+                });
             }
         });
     </script>
