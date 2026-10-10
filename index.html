@@ -160,7 +160,7 @@
         .nav-buttons {
             display: flex;
             gap: 15px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .btn {
@@ -291,16 +291,14 @@
         <!-- الصفحة الأولى: الترحيب بالفيديو -->
         <div class="page active" id="page1">
             <div class="avatar-container">
-                <!-- المستطيل الأعلى يحتوي الآن على عبارة الترحيب الرئيسية -->
+                <!-- المستطيل الأعلى يظل ثابتاً بالعبارة المطلوبة فقط -->
                 <div class="speech-bubble" id="speechBubble" data-ar="مرحباً بك في موقع FSX7584!" data-en="Welcome to FSX7584 website!">مرحباً بك في موقع FSX7584!</div>
-                <div class="avatar-box" onclick="greetUser()">
+                <div class="avatar-box" onclick="playVideo()">
                     <video class="avatar-video" autoplay loop muted playsinline preload="metadata">
                         <source src="./video-output-AC78C5D7-E112-4DE8-B05A-231474A771C5-2.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
-
-            <p data-ar="موقعي الشخصي لاستعراض المشاريع والتصاميم والخبرات." data-en="My personal website to showcase projects, designs, and expertise.">موقعي الشخصي لاستعراض المشاريع والتصاميم والخبرات.</p>
 
             <div class="nav-buttons">
                 <button class="btn" onclick="changePage(2)" data-ar="التالي ⬅️" data-en="Next ➡️">التالي ⬅️</button>
@@ -363,18 +361,6 @@
         let currentLang = 'ar';
         let currentTheme = 'dark';
 
-        const arMessages = [
-            "مرحباً بك في موقع FSX7584!",
-            "تسعدنا زيارتك لموقع FSX7584! 🚀",
-            "استمتع بتصفح الموقع! 🎨"
-        ];
-        const enMessages = [
-            "Welcome to FSX7584 website!",
-            "Glad to have you at FSX7584! 🚀",
-            "Enjoy exploring the website! 🎨"
-        ];
-        let msgIndex = 0;
-
         function changePage(pageNum) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(`page${pageNum}`).classList.add('active');
@@ -382,10 +368,11 @@
             window.scrollTo(0,0);
         }
 
-        function greetUser() {
-            const msgs = currentLang === 'ar' ? arMessages : enMessages;
-            msgIndex = (msgIndex + 1) % msgs.length;
-            document.getElementById('speechBubble').innerText = msgs[msgIndex];
+        function playVideo() {
+            const vid = document.querySelector('.avatar-video');
+            if (vid && vid.paused) {
+                vid.play();
+            }
         }
 
         function toggleTheme() {
@@ -405,11 +392,8 @@
             document.querySelectorAll('[data-ar]').forEach(el => {
                 el.innerText = el.getAttribute(`data-${currentLang}`);
             });
-
-            document.getElementById('speechBubble').innerText = currentLang === 'ar' ? arMessages[msgIndex] : enMessages[msgIndex];
         }
 
-        // إجبار الفيديو على التشغيل السريع فور التحميل
         document.addEventListener('DOMContentLoaded', () => {
             const vid = document.querySelector('.avatar-video');
             if (vid) {
