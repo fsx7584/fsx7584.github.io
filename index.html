@@ -129,9 +129,9 @@
             color: var(--text-color);
             padding: 12px 24px;
             border-radius: 20px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
             box-shadow: 0 0 20px var(--accent-glow);
             position: relative;
         }
@@ -149,12 +149,6 @@
             filter: drop-shadow(0 0 25px var(--accent-glow));
             object-fit: cover;
             background-color: var(--card-bg);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: var(--text-color);
         }
 
         p {
@@ -297,14 +291,15 @@
         <!-- الصفحة الأولى: الترحيب بالفيديو -->
         <div class="page active" id="page1">
             <div class="avatar-container">
-                <div class="speech-bubble" id="speechBubble">مرحباً بك في موقع FSX7584! 👋</div>
+                <!-- المستطيل الأعلى يحتوي الآن على عبارة الترحيب الرئيسية -->
+                <div class="speech-bubble" id="speechBubble" data-ar="مرحباً بك في موقع FSX7584!" data-en="Welcome to FSX7584 website!">مرحباً بك في موقع FSX7584!</div>
                 <div class="avatar-box" onclick="greetUser()">
-                    <video class="avatar-video" autoplay loop muted playsinline preload="auto">
+                    <video class="avatar-video" autoplay loop muted playsinline preload="metadata">
                         <source src="./video-output-AC78C5D7-E112-4DE8-B05A-231474A771C5-2.mp4" type="video/mp4">
                     </video>
                 </div>
             </div>
-            <h1 data-ar="مرحباً بكم في FSX7584" data-en="Welcome to FSX7584">مرحباً بكم في FSX7584</h1>
+
             <p data-ar="موقعي الشخصي لاستعراض المشاريع والتصاميم والخبرات." data-en="My personal website to showcase projects, designs, and expertise.">موقعي الشخصي لاستعراض المشاريع والتصاميم والخبرات.</p>
 
             <div class="nav-buttons">
@@ -368,8 +363,16 @@
         let currentLang = 'ar';
         let currentTheme = 'dark';
 
-        const arMessages = ["أهلاً بك زائرنا العزيز! ✨", "تسعدنا زيارتك لموقع FSX7584! 🚀", "استمتع بتصفح الموقع! 🎨"];
-        const enMessages = ["Welcome dear visitor! ✨", "Glad to have you at FSX7584! 🚀", "Enjoy exploring the website! 🎨"];
+        const arMessages = [
+            "مرحباً بك في موقع FSX7584!",
+            "تسعدنا زيارتك لموقع FSX7584! 🚀",
+            "استمتع بتصفح الموقع! 🎨"
+        ];
+        const enMessages = [
+            "Welcome to FSX7584 website!",
+            "Glad to have you at FSX7584! 🚀",
+            "Enjoy exploring the website! 🎨"
+        ];
         let msgIndex = 0;
 
         function changePage(pageNum) {
@@ -403,8 +406,16 @@
                 el.innerText = el.getAttribute(`data-${currentLang}`);
             });
 
-            document.getElementById('speechBubble').innerText = currentLang === 'ar' ? "مرحباً بك في موقع FSX7584! 👋" : "Welcome to FSX7584! 👋";
+            document.getElementById('speechBubble').innerText = currentLang === 'ar' ? arMessages[msgIndex] : enMessages[msgIndex];
         }
+
+        // إجبار الفيديو على التشغيل السريع فور التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            const vid = document.querySelector('.avatar-video');
+            if (vid) {
+                vid.play().catch(() => {});
+            }
+        });
     </script>
 </body>
 </html>
